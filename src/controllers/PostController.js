@@ -1,12 +1,30 @@
-const Post = require('../models/Post')
-
+const Post = require('../models/Post');
+const { mongooseToObject, multipleMongooseToObject } = require('../util/mongoose');
 class PostController {
 
-    // [GET] /courses/:slug
+    // [GET] /post/:slug
+    find(req, res, next) {
+        Post.find({})
+            .then(post => {
+                res.render('post/show', {
+                    other: multipleMongooseToObject(post)
+                });
+            })
+            .catch(next)
+    }
     show(req, res, next) {
+        Post.find({})
+            .then(post => {
+                res.render('post/show', {
+                    other: multipleMongooseToObject(post)
+                });
+            })
+            .catch(next)
         Post.findOne({ slug: req.params.slug })
-            .then(course => {
-                res.render('post/show', { Post: mongooseToObject(course) });
+            .then(post => {
+                res.render('post/show', {
+                    post: mongooseToObject(post)
+                });
             })
             .catch(next)
     }
