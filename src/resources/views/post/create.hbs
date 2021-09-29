@@ -1,0 +1,26 @@
+<div class="mt-4">
+    <h3>Đăng blog</h3>
+    <form method="POST" action="/post/store">
+        <div class="mb-3">
+            <label for="title" class="form-label">Tiêu đề</label>
+            <input type="text" class="form-control" id="title" name="title">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Mô tả blog</label>
+            <textarea type="text" class="form-control" id="description" name="description"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="content" class="form-label">Nội dung</label>
+            <textarea type="text" class="form-control" id="content" name="content"></textarea>  
+        </div>
+        <div class="mb-3">
+            <label for="image" class="form-label">image</label>
+            <input type="text" class="form-control" id="image" name="image">
+        </div>
+        <div class="mb-3">
+            <label for="published" class="form-label">published</label>
+            <input type="text" class="form-control" id="published" name="published">
+        </div>
+        <button type="submit" class="btn btn-primary">Thêm blog</button>
+    </form>
+</div>
