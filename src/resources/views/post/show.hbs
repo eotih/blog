@@ -1,25 +1,29 @@
 <div class="mt-4">
   <div class="row">
-    <div class="col-lg-3">
-      {{#each other}}
-        <div class="card" style="width: 18rem;">
-          <img src="{{this.image}}" class="img-thumbnail" alt="..." />
-          <div class="card-body">
-            <p>{{this.description}}</p>
-          </div>
-        </div>
-      {{/each}}
-    </div>
     <div class="col-lg-9">
       <h2>{{post.title}}</h2>
-      <img
-        src="{{post.image}}"
-        class="card-img-top"
-        alt="..."
-        width="537"
-        height="358"
-      />
-      <p>{{post.content}}</p>
+      </br>
+      <div data-data="{{post.content}}" id="inner">
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <h5>Other Posts</h5>
+      {{#each other }}
+      <div class="mb-4">
+        <div class="card" style="width: 18rem;">
+        <img src="{{this.image}}" class="img-thumbnail" alt="..." />
+        <div class="card-body">
+          <h5>{{this.title}}</h5>
+          {{this.description}}
+        </div>
+      </div>
+      </div>
+      {{/each}}
     </div>
   </div>
 </div>
+<script>
+
+  var x = document.getElementById("inner").getAttribute("data-data")
+  document.getElementById("inner").innerHTML = x
+</script>

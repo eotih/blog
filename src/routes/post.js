@@ -5,7 +5,7 @@ const postController = require('../controllers/PostController')
 
 // router.get('/:slug', postController.show)
 router.get('/create', postController.create)
-router.get('/:slug', postController.show, postController.find)
+router.get('/:slug', postController.show)
 router.post('/store', postController.store)
 
 module.exports = router
