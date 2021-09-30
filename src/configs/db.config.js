@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 async function connectDatabase() {
-    const mongoDbUrl = `mongodb://${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/${process.env.MONGO_DB}`;
+    const {MONGO_HOST,MONGO_PORT,MONGO_DB} = process.env;
+    const mongoDbUrl = `mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_DB}`;
     console.log(mongoDbUrl);
     try {
         await mongoose.connect(mongoDbUrl, {
