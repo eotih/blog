@@ -1,0 +1,75 @@
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <div class="hstack ">
+            <h6 class="m-0 font-weight-bold text-primary">Blog của tôi</h6>
+            <button type="button" class="btn btn-primary position-relative ms-auto">
+                Thùng rác
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {{deletedCount}}
+                </span>
+            </button>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="mb-3 d-flex align-items-center">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="checkbox-all">
+                <label class="form-check-label" for="checkbox-all">
+                    Chọn tất cả
+                </label>
+            </div>
+            <select class="form-select form-select-sm checkbox-select-all-options" name="action" required
+                aria-label="Default select example">
+                <option value="">-- Hành động --</option>
+                <option value="delete">Xóa</option>
+            </select>
+            <button id="removeClass" class="btn btn-primary btn-sm btn-check-all-submit disabled">
+                Thực hiện
+            </button>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Conent</th>
+                        <th>Thumbnail</th>
+                        <th>Created date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each post}}
+
+                    <tr>
+                        <td>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="{{this._id}}" name="courseIds[]"
+                                    id="courseIds[]">
+                            </div>
+                        </td>
+                        <td>{{sum @index 1}}</td>
+                        <td>{{this.title}}</td>
+                        <td>{{this.description}}</td>
+                        <td id="inner" hieudeptrai="{{this.content}}"></td>
+                        <td><img src="{{this.image}}" style="width:200px; height:200px" /></td>
+                        <td>{{this.createdAt}}</td>
+                        <td>
+                            <button type="button" class="btn btn-warning position-relative ms-auto">Edit</button>
+                            <button type="button" class="btn btn-danger position-relative ms-auto">Delete</button>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    var x = document.getElementById("inner").getAttribute("hieudeptrai")
+    document.getElementById("inner").innerHTML = x.substring(0, 500) + '...'
+</script>
