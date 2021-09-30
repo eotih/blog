@@ -13,6 +13,8 @@ db.connectDatabase();
 
 const app = express();
 const port = process.env.PORT || 3333;
+// Cấp quyền cho phép sử dụng PUT DELETE
+app.use(methodOverride('_method'))
 
 app.use(morgan("tiny"));
 app.use(cors());
