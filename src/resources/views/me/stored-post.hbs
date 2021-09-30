@@ -54,7 +54,7 @@
                         <td>1</td>
                         <td>{{this.title}}</td>
                         <td>{{this.description}}</td>
-                        <td id="inner" hieudeptrai="{{this.content}}"></td>
+                        <td id="inner" hieudeptrai="{{this.content}}">{{this.content}}</td>
                         <td><img src="{{this.image}}"style="width:200px; height:200px"/></td>
                         <td>{{this.createdAt}}</td>
                         <td>
@@ -68,7 +68,7 @@
         </div>
     </div>
 </div>
-<script>
+{{!-- <script>
   var x = document.getElementById("inner").getAttribute("hieudeptrai")
   document.getElementById("inner").innerHTML = `<p>${x.slice(0, 200)+'...'};</p>`
-</script>
+</script> --}}

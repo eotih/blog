@@ -1,14 +1,17 @@
 const Post = require('../models/Post')
-const { multipleMongooseToObject } = require('../util/mongoose')
+const { multipleMongooseToObject,mongooseToObject } = require('../util/mongoose')
 class PostController {
     // [GET] /
     index(req, res, next) {
-       Post.find({})
-       .then(post =>{ 
-           res.render('home', {
-               post: multipleMongooseToObject(post)
-           })
-       })
+        Promise.all([Post.find(), Post.findOne().sort('-createdAt')])
+        .then(([post, postDetails]) => {
+            res.render('home', {
+                other: mongooseToObject(postDetails),
+                post: multipleMongooseToObject(post)
+            });
+        })
+        .catch(next)
+       
     }
 }
 
