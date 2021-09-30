@@ -44,7 +44,6 @@
                 </thead>
                 <tbody>
                     {{#each post}}
-
                     <tr>
                         <td>
                             <div class="form-check">
@@ -52,11 +51,11 @@
                                     id="courseIds[]">
                             </div>
                         </td>
-                        <td>{{sum @index 1}}</td>
+                        <td>1</td>
                         <td>{{this.title}}</td>
                         <td>{{this.description}}</td>
                         <td id="inner" hieudeptrai="{{this.content}}"></td>
-                        <td><img src="{{this.image}}" style="width:200px; height:200px" /></td>
+                        <td><img src="{{this.image}}"style="width:200px; height:200px"/></td>
                         <td>{{this.createdAt}}</td>
                         <td>
                             <button type="button" class="btn btn-warning position-relative ms-auto">Edit</button>
@@ -70,6 +69,6 @@
     </div>
 </div>
 <script>
-    var x = document.getElementById("inner").getAttribute("hieudeptrai")
-    document.getElementById("inner").innerHTML = x.substring(0, 500) + '...'
+  var x = document.getElementById("inner").getAttribute("hieudeptrai")
+  document.getElementById("inner").innerHTML = `<p>${x.slice(0, 200)+'...'};</p>`
 </script>
