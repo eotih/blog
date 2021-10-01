@@ -16,11 +16,11 @@ class MeController {
                 })
             ).catch(next)
     }
-    // [GET] /me/trash/music
+    // [GET] /me/trash/post
     trashMusic(req, res, next) {
         Post.findDeleted({})
-            .then((courses) => res.render('me/trash-music', {
-                courses: multipleMongooseToObject(courses)
+            .then((post) => res.render('me/trash-post', {
+                post: multipleMongooseToObject(post)
             }))
             .catch(next)
     }

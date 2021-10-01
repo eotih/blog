@@ -40,6 +40,24 @@ class PostController {
             .then(() => res.redirect('/me/stored/post'))
             .catch(next);
     }
+    //[DELETE] /post/:id/
+    delete(req, res, next) {
+        Post.delete({ _id: req.params.id })
+            .then(() => res.redirect('back'))
+            .catch(next);
+    }
+    //[PATCH] /post/:id/restore
+    restore(req, res, next) {
+        Post.restore({ _id: req.params.id })
+            .then(() => res.redirect('back'))
+            .catch(next);
+    } 
+    //[DELETE] /post/:id/force
+    forceDelete(req, res, next) {
+        Post.deleteOne({ _id: req.params.id })
+            .then(() => res.redirect('back'))
+            .catch(next);
+    }
 }
 
 module.exports = new PostController;

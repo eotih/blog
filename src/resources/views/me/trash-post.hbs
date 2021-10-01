@@ -1,0 +1,125 @@
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <div class="hstack">
+            <h6 class="m-0 font-weight-bold text-primary">Blog đã xóa</h6>
+            <a type="button" class="btn btn-primary position-relative ms-auto" href="/me/stored/post">
+                Danh sách blog
+            </a>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="mb-3 d-flex align-items-center">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="checkbox-all" />
+                <label class="form-check-label" for="checkbox-all">
+                    Chọn tất cả
+                </label>
+            </div>
+            <select class="form-select form-select-sm checkbox-select-all-options" name="action" required
+                aria-label="Default select example">
+                <option value="">-- Hành động --</option>
+                <option value="delete">Khôi phục</option>
+            </select>
+            <button id="removeClass" class="btn btn-primary btn-sm btn-check-all-submit disabled">
+                Thực hiện
+            </button>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Content</th>
+                        <th>Thumbnail</th>
+                        <th>Created date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each post}}
+                    <tr>
+                        <td>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="{{this._id}}" name="courseIds[]"
+                                    id="courseIds[]" />
+                            </div>
+                        </td>
+                        <td>1</td>
+                        <td>{{this.title}}</td>
+                        <td>{{this.description}}</td>
+                        <td id="inner" hieudeptrai="{{this.content}}"></td>
+                        <td><img src="{{this.image}}" style="width:200px; height:200px" /></td>
+                        <td>{{this.createdAt}}</td>
+                        <td>
+                            <a data-id="{{this._id}}" href="" type="button"
+                                class="btn btn-success position-relative ms-auto btn-restore">Restore</a>
+                            <a data-id="{{this._id}}" data-bs-target="#delete-post-modal" type="button"
+                                data-bs-toggle="modal" class="btn btn-danger position-relative ms-auto">Delete</a>
+                        </td>
+                    </tr>
+                    {{else}}
+                    <tr>
+                        <td colspan="8" class="text-center">Thùng rác trống.
+                            <a href="/me/stored/post"> Danh sách blog</a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+{{! Confirm xóa khóa học }}
+<div id="delete-post-modal" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xóa Blog ?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Hành động này không thể khôi phục. Bạn vẫn muốn muốn xóa blog này?</p>
+            </div>
+            <div class="modal-footer">
+                <button id="btn-delete-post" type="button" class="btn btn-danger">Xóa
+                    bỏ</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{! Delete hidden form }}
+<form method="POST" name="delete-post-form"></form>
+<form method="POST" name="restore-post-form"></form>
+
+<script>
+    document.addEventListener(`DOMContentLoaded`, function () {
+        var postId;
+        var deleteForm = document.forms['delete-post-form'];
+        var restoreForm = document.forms['restore-post-form'];
+        var restoreBtn = $('.btn-restore')
+        var btnDeletePost = document.getElementById('btn-delete-post');
+
+        //Then dialog confirm clicked
+        $('#delete-post-modal').on('show.bs.modal', function (event) {
+            var button = event.relatedTarget
+            postId = button.getAttribute('data-id')
+        })
+        btnDeletePost.onclick = function () {
+            deleteForm.action = '/post/' + postId + '/force?_method=DELETE';
+            deleteForm.submit()
+        }
+        restoreBtn.click(function (e) {
+            e.preventDefault();
+            var postId = $(this).data('id')
+            restoreForm.action = '/post/' + postId + '/restore?_method=PATCH';
+            restoreForm.submit();
+        })
+
+    })
+</script>>
