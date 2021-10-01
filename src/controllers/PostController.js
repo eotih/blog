@@ -1,5 +1,5 @@
 const Post = require('../models/Post');
-const { mongooseToObject, multipleMongooseToObject } = require('../util/mongoose');
+const { mongooseToObject, multipleMongooseToObject,getDateNowISOLocal } = require('../util/mongoose');
 class PostController {
 
     // [GET] /post/:slug
@@ -51,12 +51,30 @@ class PostController {
         Post.restore({ _id: req.params.id })
             .then(() => res.redirect('back'))
             .catch(next);
-    } 
+    }
     //[DELETE] /post/:id/force
     forceDelete(req, res, next) {
         Post.deleteOne({ _id: req.params.id })
             .then(() => res.redirect('back'))
             .catch(next);
+    }
+    //[POST] /courses/handle-form-action
+    handleFormAction(req, res, next) {
+        console.log(req.body.action)
+        switch (req.body.action) {
+            case 'delete':
+                Post.delete({ _id: { $in: req.body.postIds } })
+                    .then(() => res.redirect('back'))
+                    .catch(next);
+                break;
+            case 'restore':
+                Post.restore({ _id: { $in: req.body.postIds } })
+                    .then(() => res.redirect('back'))
+                    .catch(next);
+                break;
+            default:
+                res.json({ message: 'Action is invalid' })
+        }
     }
 }
 
