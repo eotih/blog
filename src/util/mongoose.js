@@ -6,13 +6,12 @@ module.exports = {
     mongooseToObject: function (mongoose) {
         return mongoose ? mongoose.toObject() : mongoose;
     },
-    getDateNowISOLocal: function (dateTime) {
-        try {
-            let dateNow = moment().format(dateTime);
-            dateNow = new Date(dateNow);
-            return dateNow;
-        } catch (error) {
-            throw Error(error.message);
-        }
-    }
+    // getDateNowISOLocal: function (dateTime) {
+    //     try {
+    //         let dateNow = moment().format( 'MMMM Do YYYY, h:mm:ss a');
+    //         return dateNow;
+    //     } catch (error) {
+    //         throw Error(error.message);
+    //     }
+    // }
 };
