@@ -1,5 +1,5 @@
 const Post = require('../models/Post');
-const { mongooseToObject, multipleMongooseToObject,getDateNowISOLocal } = require('../util/mongoose');
+const { mongooseToObject, multipleMongooseToObject } = require('../util/mongoose');
 class PostController {
 
     // [GET] /post/:slug

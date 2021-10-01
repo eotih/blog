@@ -1,0 +1,50 @@
+<div class="mt-4 mb-4">
+    <div class="row">
+        <div class="col-xl-12 col-lg-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">ĐĂNG BÀI</h6>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="/user/store">
+                        <div class="mb-3">
+                            <label for="fullname" class="form-label">fullname</label>
+                            <input type="text" class="form-control" id="fullname" name="fullname">
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">phone</label>
+                            <input type="text" class="form-control" id="phone" name="phone">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">email</label>
+                            <input type="text" class="form-control" id="email" name="email">
+                        </div>
+                         <div class="mb-3">
+                            <label for="password" class="form-label">password</label>
+                            <input type="text" class="form-control" id="password" name="password">
+                        </div>
+                        <div class="mb-3">
+                            <label for="image" class="form-label">image</label>
+                            <input type="text" class="form-control" id="image" name="image">
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">description</label>
+                            <input type="text" class="form-control" id="description" name="description">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-user btn-block col-xl-12">Thêm blog</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+
+        $('#content').summernote({
+            placeholder: 'Hello Bootstrap 4',
+            tabsize: 2,
+            height: 300,
+        });
+    });
+</script>

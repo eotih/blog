@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
-const slug = require('mongoose-slug-generator');
 const mongooseDelete = require('mongoose-delete');
 
 const Schema = mongoose.Schema;
 
-const Post = new Schema({
-    user_id: { type: Number, require: true },
-    role_id: { type: Number, require: true },
+const User = new Schema({
+    
+    user_id: { type: mongoose.ObjectId  },
+    role_id: { type: mongoose.ObjectId },
     fullname: { type: String, maxLength: 255 },
-    phone: { type: Number, maxLength: 50},//uniqie = true là không có thể được 2 slug
+    phone: { type: String, maxLength: 50},
     email: { type: String, maxLength: 50 },
     password: { type: String, maxLength: 50 },
     image: { type: String },
@@ -17,11 +17,10 @@ const Post = new Schema({
     timestamps: true,
 });
 
-//Add plugin
-mongoose.plugin(slug);
-Course.plugin(mongooseDelete, {
+
+User.plugin(mongooseDelete, {
     deletedAt: true,
     overrideMethods: 'all'
 })
 
-module.exports = mongoose.model('Course', Course);
+module.exports = mongoose.model('User', User);
