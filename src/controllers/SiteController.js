@@ -5,6 +5,7 @@ class PostController {
     index(req, res, next) {
         Promise.all([Post.find(), Post.findOne().sort('-createdAt')])
         .then(([post, postDetails]) => {
+            // res.json(multipleMongooseToObject(post))
             res.render('home', {
                 other: mongooseToObject(postDetails),
                 post: multipleMongooseToObject(post)

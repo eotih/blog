@@ -7,6 +7,8 @@ class PostController {
         // dùng Promise.all để gộp 2 chức năng lại
         Promise.all([Post.find(), Post.findOne({ slug: req.params.slug })])
             .then(([post, postDetails]) => {
+                // res.json(mongooseToObject(postDetails))
+                // res.json(multipleMongooseToObject(post))
                 res.render('post/show', {
                     post: mongooseToObject(postDetails),
                     other: multipleMongooseToObject(post).slice(0, 4)
